@@ -2,9 +2,11 @@ package platform.codingnomads.co.usermicroservice.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import platform.codingnomads.co.usermicroservice.model.Role;
-import platform.codingnomads.co.usermicroservice.model.Roles;
+
+import java.util.List;
 
 public interface RoleRepository extends JpaRepository<Role, Long> {
+    Role findByRole(String role);
 
-    public Role findByRole(Roles role);
+    List<Role> findByRoleIn(List<String> roleNames);
 }

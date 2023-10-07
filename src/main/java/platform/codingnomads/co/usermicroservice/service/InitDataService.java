@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import platform.codingnomads.co.usermicroservice.model.Role;
-import platform.codingnomads.co.usermicroservice.model.Roles;
 import platform.codingnomads.co.usermicroservice.model.User;
 import platform.codingnomads.co.usermicroservice.repository.RoleRepository;
 import platform.codingnomads.co.usermicroservice.repository.UserRepository;
@@ -25,14 +24,14 @@ public class InitDataService {
 
     @Transactional
     public void initAppData() {
-        Role userRole = Role.builder().role(Roles.ROLE_USER).build();
-        Role adminRole = Role.builder().role(Roles.ROLE_ADMIN).build();
+        Role userRole = Role.builder().role("ROLE_USER").build();
+        Role adminRole = Role.builder().role("ROLE_ADMIN").build();
 
         if (roleRepo.findAll().isEmpty()) {
-            roleRepo.saveAll(Arrays.asList(userRole, adminRole));
+            roleRepo.saveAll(Arrays.asList(adminRole, userRole));
         }
 
-        Role adminRoleSaved = roleRepo.findByRole(Roles.ROLE_ADMIN);
+        Role adminRoleSaved = roleRepo.findByRole("ROLE_ADMIN");
 
 
         User admin = User.builder()
