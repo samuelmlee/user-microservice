@@ -36,6 +36,16 @@ public class UserController {
         }
     }
 
+    @GetMapping("/username/exists/{username}")
+    public ResponseEntity<Boolean> isExistingUsername(@PathVariable String username) {
+        User user = userService.getUserByUsername(username);
+        if (user != null) {
+            return ResponseEntity.ok(true);
+        } else {
+            return ResponseEntity.ok(false);
+        }
+    }
+
     @PostMapping
     public ResponseEntity<?> createNewUser(@RequestBody User user) {
         try {
